@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
         public static void login(WebDriver driver, String email, String password) {
-            WebDriverWait wait = new WebDriverWait(driver, 10);
+            WebDriverWait wait = new WebDriverWait(driver, 30L);
             wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("a[href=\"/HospitalSeeker/login\""))));
             driver.findElement(By.cssSelector("img.localization-flag")).click();
             driver.findElement(By.linkText("Українська")).click();
@@ -24,35 +24,47 @@ import org.openqa.selenium.support.ui.WebDriverWait;
             driver.findElement(By.id("loginSubmit")).click();
         }
 
-        public static void logout(WebDriver driver) {
-            driver.findElement(By.xpath("html/body/nav/div[1]/div[2]/ul/li[5]/a")).click();
-            driver.findElement(By.cssSelector("span.glyphicon-log-out")).click();
+        public static void logoutManager(WebDriver driver) throws InterruptedException {
+            WebDriverWait wait = new WebDriverWait(driver, 30L);
+            driver.findElement(By.xpath("/html/body/nav/div[1]/div[2]/ul/li[5]/a")).click();
+
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/nav/div[1]/div[2]/ul/li[5]/ul/li[2]/a/span")));
+            Thread.sleep(2000);
+            driver.findElement(By.xpath("/html/body/nav/div[1]/div[2]/ul/li[5]/ul/li[2]/a/span")).click();
+        }
+        public static void logoutDoctor(WebDriver driver) throws InterruptedException {
+            WebDriverWait wait = new WebDriverWait(driver, 30L);
+            driver.findElement(By.xpath("html/body/nav/div[1]/div[2]/ul/li[6]/a")).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("html/body/nav/div[1]/div[2]/ul/li[6]/a")));
+            Thread.sleep(2000);
+            driver.findElement(By.xpath("html/body/nav/div[1]/div[2]/ul/li[6]/ul/li[2]/a/span")).click();
         }
 
         public static void choseDoctor(WebDriver driver) {
-            WebDriverWait wait = new WebDriverWait(driver, 10L);
+            WebDriverWait wait = new WebDriverWait(driver, 30L);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.person > img.img-responsive")));
             driver.findElement(By.cssSelector("div.person > img.img-responsive")).click();
         }
 
         public static void choseDayTab(WebDriver driver) {
-            WebDriverWait wait = new WebDriverWait(driver, 10L);
+            WebDriverWait wait = new WebDriverWait(driver, 30L);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.dhx_cal_tab_first")));
             driver.findElement(By.cssSelector("div.dhx_cal_tab_first")).click();
         }
 
         public static void choseNextWeek(WebDriver driver) {
-            WebDriverWait wait = new WebDriverWait(driver, 10L);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.dhx_cal_next_button")));
-            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.dhx_cal_next_button")));
-            System.out.println(driver.findElements(By.cssSelector("div.dhx_cal_next_button")).size());
-            driver.findElement(By.cssSelector("div.dhx_cal_next_button")).click();
+            WebDriverWait wait = new WebDriverWait(driver, 30L);
+           // wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.dhx_cal_next_button")));
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("html/body/section/div/div/div/div/div/div[1]/div[2]")));
+           // System.out.println(driver.findElements(By.cssSelector("div.dhx_cal_next_button")).size());
+            driver.findElement(By.xpath("html/body/section/div/div/div/div/div/div[1]/div[2]")).click();
         }
 
         public static void doubleClickJS(By elem, WebDriver driver) {
             JavascriptExecutor js = (JavascriptExecutor)driver;
             String doubleClickJS = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('dblclick',true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject){ arguments[0].fireEvent('ondblclick');}window.stop();";
-            js.executeScript(doubleClickJS, elem);
+            js.executeScript(doubleClickJS, driver.findElement(elem));
         }
     }
 
