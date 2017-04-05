@@ -1,4 +1,4 @@
-package com.exaple.tests;
+package com.example.tests;
 
 import org.apache.bcel.ExceptionConstants;
 import org.openqa.selenium.By;

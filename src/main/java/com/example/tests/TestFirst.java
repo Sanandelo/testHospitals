@@ -1,4 +1,4 @@
-package com.exaple.tests;
+package com.example.tests;
 
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
