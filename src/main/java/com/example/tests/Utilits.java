@@ -1,4 +1,4 @@
-package com.exaple.tests;
+package com.example.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
