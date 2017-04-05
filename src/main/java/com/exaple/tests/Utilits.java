@@ -1,5 +1,6 @@
 package com.exaple.tests;
 
+import org.apache.bcel.ExceptionConstants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,11 +10,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public class Utilits {
 
 
-        public static void login(WebDriver driver, String email, String password) {
-            WebDriverWait wait = new WebDriverWait(driver, 30L);
+        public static void login(WebDriver driver, String email, String password) throws InterruptedException {
+            WebDriverWait wait = new WebDriverWait(driver, 20L);
             wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("a[href=\"/HospitalSeeker/login\""))));
             driver.findElement(By.cssSelector("img.localization-flag")).click();
             driver.findElement(By.linkText("Українська")).click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Ввійти")));
+            Thread.sleep(3000);
             driver.findElement(By.linkText("Ввійти")).click();
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
             wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("email"))));
@@ -26,19 +29,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
         public static void logoutManager(WebDriver driver) throws InterruptedException {
             WebDriverWait wait = new WebDriverWait(driver, 30L);
-            driver.findElement(By.xpath("/html/body/nav/div[1]/div[2]/ul/li[5]/a")).click();
-
-
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/nav/div[1]/div[2]/ul/li[5]/ul/li[2]/a/span")));
-            Thread.sleep(2000);
-            driver.findElement(By.xpath("/html/body/nav/div[1]/div[2]/ul/li[5]/ul/li[2]/a/span")).click();
+            driver.findElement(By.xpath("//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[5]/a")).click();
+            driver.findElement(By.xpath("//*[@id=\"dropdawn\"]/li[2]/a/span")).click();
         }
         public static void logoutDoctor(WebDriver driver) throws InterruptedException {
             WebDriverWait wait = new WebDriverWait(driver, 30L);
-            driver.findElement(By.xpath("html/body/nav/div[1]/div[2]/ul/li[6]/a")).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("html/body/nav/div[1]/div[2]/ul/li[6]/a")));
-            Thread.sleep(2000);
-            driver.findElement(By.xpath("html/body/nav/div[1]/div[2]/ul/li[6]/ul/li[2]/a/span")).click();
+
+            driver.findElement(By.xpath("//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[6]/a")).click();
+            driver.findElement(By.xpath("//*[@id=\"dropdawn\"]/li[2]/a/span")).click();
         }
 
         public static void choseDoctor(WebDriver driver) {

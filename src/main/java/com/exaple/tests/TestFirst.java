@@ -36,12 +36,13 @@ public class TestFirst {
         baseUrl = "https://localhost:8443/HospitalSeeker/";
         driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
         driver.get(baseUrl);
-        wait = new WebDriverWait(driver, 20L);
+        wait = new WebDriverWait(driver, 10L);
     }
 
    @Test
     public void testEventCreation() throws Exception {
         Utilits.login(driver, "manager.jh@hospitals.ua", "1111");
+        Thread.sleep(5000);
         Utilits.choseDoctor(driver);
         Thread.sleep(5000);
 
@@ -57,6 +58,7 @@ public class TestFirst {
         driver.findElement(By.cssSelector("textarea.dhx_cal_editor")).sendKeys("Test");
         driver.findElement(By.cssSelector("div.dhx_menu_icon.icon_save")).click();
         driver.findElement(By.cssSelector("button.btn-success")).click();
+
 
         Utilits.logoutManager(driver);
 
@@ -96,6 +98,7 @@ public class TestFirst {
         Utilits.logoutManager(driver);
 
         Utilits.login(driver, "doctor.jw@hospitals.ua", "1111");
+
         driver.findElement(By.linkText("Робочий графік")).click();
         Thread.sleep(5000);
 
