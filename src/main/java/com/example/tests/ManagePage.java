@@ -4,52 +4,79 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * Created by radga on 05.04.2017.
- */
+
 public class ManagePage extends PageObject{
-    @FindBy(id="workWeekSize")
-    private WebElement workWeekSize;
+    @FindBy(className = "h1.text-center")
+    private WebElement hospitalName;
 
-    @FindBy(id="workDayBeginAt")
-    private WebElement workWeekBeginAt;
+    //maybe no work
+    @FindBy(className = "label[for=\"doctorPerPage\"]")
+    private WebElement showDoctorsLabel;
 
-    @FindBy(id="workDayEndAt")
-    private WebElement workDayEndAt;
+    @FindBy(id = "doctorPerPage")
+    private WebElement doctorPerPageSelector;
 
-    @FindBy(id="appointmentTime")
-    private WebElement appointmenSize;
+    @FindBy(className = "label[for=\"pref-specializationBy\"]")
+    private WebElement specializationLabel;
 
-    @FindBy(className = "button.btn-success")
-    private WebElement saveButton;
+    @FindBy(id = "pref-specializationBy")
+    private WebElement SpecializationSelector;
 
-    @FindBy(name = "day_tab")
-    private WebElement dayTabButton;
+    @FindBy(className = "label[for=\"searchBy\"]")
+    private WebElement searchByLabel;
 
-    @FindBy(name = "week_tab")
-    private WebElement weekTabButton;
+    @FindBy(id = "searchBy")
+    private WebElement searchBySelector;
 
-    @FindBy(name = "month_tab")
-    private WebElement monthTabButton;
+    @FindBy(id = "search")
+    private WebElement searchTextFild;
 
-    @FindBy(id="dhx_minical_icon")
-    private WebElement calendarMinimalIcon;
+    @FindBy(id = "searchButton")
+    private WebElement searchButton;
 
-    @FindBy(className = "div.dhx_cal_date")
-    private WebElement dateText;
+    @FindBy(id = "clearButton")
+    private WebElement clearButton;
 
-    @FindBy(className = "dhx_cal_today_button")
-    private WebElement todayButton;
 
-    @FindBy(className = "dhx_cal_prev_button")
-    private WebElement previousWeekButton;
+    //change to page refernce
+    @FindBy(css = "a[href=\"/HospitalSeeker/manager/manageDepartments/2\"]")
+    private WebElement labaratoryButton;
+    //too
+    @FindBy(css = "a[href=\"/HospitalSeeker/manager/manageDepartments/2\"]")
+    private WebElement departmentButton;
+    //too
+    @FindBy(className = "a[href=\"/HospitalSeeker/newDoctor\"]")
+    private WebElement newDoctorButton;
 
-    @FindBy(className = "dhx_cal_next_button")
-    private WebElement nextWeekButton;
+    @FindBy(xpath = "//*[@id=\"allDoctors\"]/thead/tr/th[1]")
+    private WebElement hashLabel;
 
-   @FindBy(className = "div.dhx_scale_holder ")
-   private WebElement row;
-    public ManagePage(WebDriver driver){
+    @FindBy(xpath = "//*[@id=\"allDoctors\"]/thead/tr/th[2]/i")
+    private WebElement emailLabel;
+
+    @FindBy(id = "email")
+    private WebElement sortByEmailButton;
+
+    @FindBy(xpath = "//*[@id=\"allDoctors\"]/thead/tr/th[4]/i")
+    private WebElement nameLabel;
+
+    @FindBy(id="firstName")
+    private WebElement sortByFistNameButton;
+
+    @FindBy(xpath = "//*[@id=\"allDoctors\"]/thead/tr/th[4]/i")
+    private WebElement surname;
+
+    @FindBy(id="lastName")
+    private WebElement sortBySurnameButton;
+
+    @FindBy(xpath = "//*[@id=\"allDoctors\"]/thead/tr/th[5]/i")
+    private WebElement specializtionLabel;
+
+    @FindBy(id="specialization")
+    private WebElement sortBySpecializationButton;
+
+
+    public ManagePage(WebDriver driver) {
         super(driver);
     }
 
